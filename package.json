@@ -1,25 +1,26 @@
 {
-    "name": "aframe-demo",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "helpers": [
-            "node_modules/esm"
-    ],
-    "scripts": {
-            "watch": "webpack --watch",
-            "serve": "node node_modules/live-server/live-server.js --no-browser",
-            "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-            "aframe": "^1.0.3",
-            "esm": "^3.2.25",
-            "live-server": "^1.2.1"
-    },
-    "devDependencies": {
-            "webpack": "^4.41.5",
-            "webpack-cli": "^3.3.10"
-    }
+        "name": "aframe-demo",
+        "version": "1.0.0",
+        "description": "",
+        "main": "index.js",
+        "helpers": [
+                "node_modules/esm"
+        ],
+        "scripts": {
+                "serve": "webpack-dev-server",
+                "test": "echo \"Error: no test specified\" && exit 1",
+                "build": "webpack"
+        },
+        "author": "",
+        "license": "ISC",
+        "dependencies": {
+                "aframe": "^1.0.3",
+                "esm": "^3.2.25",
+                "live-server": "^1.2.1"
+        },
+        "devDependencies": {
+                "webpack": "^4.41.5",
+                "webpack-cli": "^3.3.10",
+                "webpack-dev-server": "^3.10.1"
+        }
 }

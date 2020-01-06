@@ -2,11 +2,10 @@
 
 ## Getting Started
 
-Run `npm install` to install necessary node modules. Then run `npm run watch` to have webpack hotreload. Then run `npm run serve` to launch a webserver.
+Run `npm install` to install necessary node modules. Then run `npm run serve` to launch the webpack dev server.
 
 ```
 npm install
-npm run watch
 npm run serve
 ```
 
