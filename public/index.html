@@ -7,9 +7,11 @@
 </head>
 <body>
     <a-scene physics>
+	<a-entity position="0 2.25 -15" particle-system="preset: snow; particleCount: 5000"></a-entity>
         <a-box position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
-        <a-sky color="#ECECEC"></a-sky>
+        <!--<a-sky color="#ECECEC"></a-sky>-->
+	 <a-sky src="./img/winter-church-sm.jpg" rotation="0 -20 0"></a-sky>
     </a-scene>
 </body>
 </html>
