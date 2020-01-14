@@ -6,10 +6,156 @@
     <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
 </head>
 <body>
-    <a-scene physics>
-        <a-box position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
-        <a-sky color="#ECECEC"></a-sky>
-    </a-scene>
+<a-scene physics id="mainScene">
+    <a-assets>
+        <img src="assets/img/red_rose.png" id="flower"/>
+        <img src="assets/img/yellow_rose.png" id="photo"/>
+        <img src="assets/img/candle.png" id="candle"/>
+    </a-assets>
+
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="10" height="10" color="#7BC8A4" static-body></a-plane>
+    <a-sky color="#ECECEC"></a-sky>
+    <a-entity id="cameraRig" position="0 2 4">
+        <a-entity camera look-controls wasd-controls>
+        </a-entity>
+    </a-entity>
+</a-scene>
+
+<script>
+    $ = (queryString) => document.querySelector(queryString);
+
+    function randomIntFromInterval(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    const tributeTypes = {
+        COMMENT: 1,
+        CANDLE: 2,
+        PHOTO: 3
+    }
+
+    const tributesData = {
+        "count": "6",
+        "tributes": [{
+            "tribute": {
+                "id": "7239016",
+                "name": "Julie Padilla (Collins)",
+                "relation": null,
+                "type_id": "2",
+                "type_name": "Candle",
+                "data": "My sincere condolences to the entire family. May you all find peace at this difficult time.",
+                "datetime": "2020-01-13 20:54:44",
+                "status": "public",
+                "pretty_date": "Jan 13, 2020",
+                "pic": "http:\/\/funeralinnovations.com\/img\/tributes\/gifts\/square_candle.png",
+                "thumbnail": "",
+                "caption": ""
+            }
+        }, {
+            "tribute": {
+                "id": "7238950",
+                "name": "Billy Outlaw ",
+                "relation": null,
+                "type_id": "1",
+                "type_name": "Comment",
+                "data": "My heart felt sympathy for the family. Bill  was a great person, I only wish I had a part of his energy. He was always working or  doing for someone. I miss him now,  just didn't have enough time with him,  I would have loved to have had him for a brother.  Teach them how to play horse shoes  my friend, ",
+                "datetime": "2020-01-13 15:05:35",
+                "status": "public",
+                "pretty_date": "Jan 13, 2020",
+                "pic": null,
+                "thumbnail": "",
+                "caption": ""
+            }
+        }, {
+            "tribute": {
+                "id": "7238912",
+                "name": "Chrisina Denbaugh",
+                "relation": null,
+                "type_id": "2",
+                "type_name": "Candle",
+                "data": "Sincere sympathy to you and your family.\nMay his memory make you smile.\nYour father left quite a legacy in his children.\nLove,\nChrisina Denbaugh",
+                "datetime": "2020-01-13 10:29:56",
+                "status": "public",
+                "pretty_date": "Jan 13, 2020",
+                "pic": "http:\/\/funeralinnovations.com\/img\/tributes\/gifts\/frosted_candle.png",
+                "thumbnail": "",
+                "caption": ""
+            }
+        }, {
+            "tribute": {
+                "id": "7238815",
+                "name": "Mary Anne bohne",
+                "relation": null,
+                "type_id": "1",
+                "type_name": "Comment",
+                "data": "Anna Mae, Jeff, & family\nRemembering our connection with our Bill & Jeff, I send my sympathy & prayers. Mabohne ",
+                "datetime": "2020-01-12 20:00:22",
+                "status": "public",
+                "pretty_date": "Jan 12, 2020",
+                "pic": null,
+                "thumbnail": "",
+                "caption": ""
+            }
+        }, {
+            "tribute": {
+                "id": "7238521",
+                "name": "John and Rose Boehnen ",
+                "relation": null,
+                "type_id": "1",
+                "type_name": "Comment",
+                "data": "Our sympathy to Bill's family. Our thoughts and prayers are with you. John and Rose Boehnen",
+                "datetime": "2020-01-11 17:19:05",
+                "status": "public",
+                "pretty_date": "Jan 11, 2020",
+                "pic": null,
+                "thumbnail": "",
+                "caption": ""
+            }
+        }, {
+            "tribute": {
+                "id": "7238428",
+                "name": "Dobie Gutweiler",
+                "relation": null,
+                "type_id": "3",
+                "type_name": "Photo",
+                "data": "Billy Dahmen...horseshoe pitcher extraordinaire. ",
+                "datetime": "2020-01-11 09:57:09",
+                "status": "public",
+                "pretty_date": "Jan 11, 2020",
+                "pic": "https:\/\/7d9ac7a104d625fffc3e-bc94e86a32ebe4b7858d17daa99c15c6.ssl.cf2.rackcdn.com\/344935_mkmsgwhpn0qwn.JPG",
+                "thumbnail": "https:\/\/6419a8828084f2b62c2e-c2477b3698c62d134638081a4e70e8d1.ssl.cf2.rackcdn.com\/344935_mkmsgwhpn0qwn.JPG",
+                "caption": ""
+            }
+        }]
+    }
+
+    tributesData.tributes.forEach(function (memory) {
+        let position = {
+            x: randomIntFromInterval(-4, 4),
+            y: 0.5,
+            z: randomIntFromInterval(-5, -3)
+        };
+
+        // create tribute
+        let tribute = document.createElement('a-image');
+        tribute.setAttribute('id', `tribute_${memory.tribute.id}`)
+        tribute.setAttribute('data-text', `${memory.tribute.data}`)
+
+        // tribute.setAttribute('dynamic-body', 'shape:auto')
+
+        if (parseInt(memory.tribute.type_id) === tributeTypes.CANDLE)
+            tribute.setAttribute('src', '#candle');
+        else if (parseInt(memory.tribute.type_id) === tributeTypes.COMMENT)
+            tribute.setAttribute('src', '#flower');
+        else if (parseInt(memory.tribute.type_id) === tributeTypes.PHOTO)
+            tribute.setAttribute('src', '#photo');
+
+        tribute.setAttribute('position', position.x + ' ' + position.y + ' ' + position.z);
+        tribute.setAttribute('width', 0.4);
+        tribute.setAttribute('height', 1)
+
+        $('a-scene#mainScene').appendChild(tribute);
+    });
+</script>
 </body>
 </html>
