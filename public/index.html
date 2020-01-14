@@ -24,8 +24,9 @@
 <script>
     $ = (queryString) => document.querySelector(queryString);
 
-    function randomIntFromInterval(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
+    function randomNumberFromInterval(min, max, isFloat = false) {
+        let randomNumber = Math.random() * (max - min + 1) + min
+        return isFloat ? randomNumber : Math.floor(randomNumber)
     }
 
     const tributeTypes = {
@@ -129,11 +130,13 @@
         }]
     }
 
+    let occupiedXPositions = []
+    let occupiedYPositions = []
     tributesData.tributes.forEach(function (memory) {
         let position = {
-            x: randomIntFromInterval(-4, 4),
+            x: null,
             y: 0.5,
-            z: randomIntFromInterval(-5, -3)
+            z: randomNumberFromInterval(-5, -3)
         };
 
         // create tribute
@@ -143,15 +146,31 @@
 
         // tribute.setAttribute('dynamic-body', 'shape:auto')
 
-        if (parseInt(memory.tribute.type_id) === tributeTypes.CANDLE)
-            tribute.setAttribute('src', '#candle');
-        else if (parseInt(memory.tribute.type_id) === tributeTypes.COMMENT)
-            tribute.setAttribute('src', '#flower');
-        else if (parseInt(memory.tribute.type_id) === tributeTypes.PHOTO)
-            tribute.setAttribute('src', '#photo');
+        // set tribute graphics as well as grouped positions
+        if (parseInt(memory.tribute.type_id) === tributeTypes.CANDLE) {
+            tribute.setAttribute('src', '#candle')
+            position.x = randomNumberFromInterval(-2, 1)
 
-        tribute.setAttribute('position', position.x + ' ' + position.y + ' ' + position.z);
-        tribute.setAttribute('width', 0.4);
+            if (occupiedXPositions.includes(position.x)) {
+                position.x = randomNumberFromInterval(-2, 1)
+            }
+        } else if (parseInt(memory.tribute.type_id) === tributeTypes.COMMENT) {
+            tribute.setAttribute('src', '#flower')
+            position.x = randomNumberFromInterval(-4, -3)
+
+            if (occupiedXPositions.includes(position.x)) {
+                position.x = randomNumberFromInterval(-4, -3)
+            }
+        } else if (parseInt(memory.tribute.type_id) === tributeTypes.PHOTO) {
+            tribute.setAttribute('src', '#photo')
+            position.x = randomNumberFromInterval(2, 4)
+            if (occupiedXPositions.includes(position.x)) {
+                position.x = randomNumberFromInterval(2, 4)
+            }
+        }
+
+        tribute.setAttribute('position', position.x + ' ' + position.y + ' ' + position.z)
+        tribute.setAttribute('width', 0.4)
         tribute.setAttribute('height', 1)
 
         $('a-scene#mainScene').appendChild(tribute);
