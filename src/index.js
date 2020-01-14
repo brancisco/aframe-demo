@@ -7,5 +7,5 @@ require('aframe-extras')
 require('axios')
 
 /* REQUIRE LOCAL COMPONENTS HERE */
-require('Components/hello-world')
-require('Components/multi-photo-example')
+require('./components/hello-world')
+require('./components/multi-photo-example')
