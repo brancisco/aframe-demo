@@ -10,7 +10,9 @@ require('axios')
 require('./util')
 
 /* REQUIRE LOCAL COMPONENTS HERE */
-require('Components/hello-world')
-require('Components/multi-photo-example')
-
-require('Components/tribute-garden')
+require('./components/hello-world')
+require('./components/multi-photo-example')
+require('./components/headstone-name')
+require('./components/headstone-dates')
+require('./components/headstone-obit')
+require('./components/tribute-garden')
