@@ -4,7 +4,8 @@ AFRAME.registerComponent('headstone-name', {
     },
     init: function () {
         // api
-        fetch('https://staging.funeralinnovations.com/obituaries/getObituary?obit_id=344935&format=json&cors=1')
+        const urlParams = new URLSearchParams(window.location.search)
+        fetch('https://staging.funeralinnovations.com/obituaries/getObituary?obit_id=' + urlParams.get('obit_id') + '&format=json&cors=1')
         .then(response => response.json())
         .then(json => {
             console.log(json)
