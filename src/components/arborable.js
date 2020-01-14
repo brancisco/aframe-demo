@@ -15,7 +15,7 @@ AFRAME.registerComponent('arborable', {
         el.addEventListener('click', (evt) => {
             let pos = evt.detail.intersection.point
             console.log(pos)
-            for (p of this.positions) {
+            for (let p of this.positions) {
                 console.log(UTILS.distance(pos.x, pos.z, p.x, p.z))
                 if (UTILS.distance(pos.x, pos.z, p.x, p.z) < 2.5) {
                     return
@@ -45,6 +45,7 @@ AFRAME.registerComponent('arborable', {
             let tree = document.createElement('a-obj-model')
             tree.setAttribute('scale', defaults.scale)
             tree.setAttribute('position', Object.values(evt.detail.intersection.point).join(' '))
+            tree.setAttribute('rotation', '0 ' + Math.floor(Math.random() * 360) + ' 0')
             tree.setAttribute('src', '#tree-obj')
             tree.setAttribute('mtl', '#tree-mtl')
             tree.setAttribute('animation', "property: scale; to: 0.1 0.1 0.1; loop: false; dur: 3000")
