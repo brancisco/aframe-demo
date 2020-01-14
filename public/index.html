@@ -7,9 +7,18 @@
 </head>
 <body>
     <a-scene physics>
-        <a-box position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>
+        <a-assets>
+            <!-- HERE WE SHOULD DEFINE OUR ASSETS HERE -->
+            <!-- <img id="example_img" src="example.png"> -->
+            <!-- <a-asset-item id="example_obj" src="example.obj"></a-asset-item> -->
+        </a-assets>
+        <!-- THIS IS HOW WE SHOULD REFERENCE THE ASSETS ABOVE -->
+        <!-- <a-plane src="#example_img"></a-plane> -->
+
+        <a-entity hello-world></a-entity>
+        <a-box id="cool_box" position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
-        <a-sky color="#ECECEC"></a-sky>
+        <a-sky rotation="0 -20 0" color="#EEEEFF"></a-sky>
     </a-scene>
 </body>
 </html>
