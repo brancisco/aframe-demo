@@ -6,6 +6,9 @@ require('aframe')
 require('aframe-extras')
 require('axios')
 
+/* LIBS */
+require('./util')
+
 /* REQUIRE LOCAL COMPONENTS HERE */
 require('Components/hello-world')
 require('Components/multi-photo-example')

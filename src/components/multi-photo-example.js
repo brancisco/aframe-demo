@@ -1,3 +1,5 @@
+require('./sub-component-example.js')
+
 AFRAME.registerComponent('multi-photo-example', {
     schema: {
         tributes: { type: 'number', default: 0 }
@@ -28,12 +30,11 @@ AFRAME.registerComponent('multi-photo-example', {
             console.log(json)
             // create elements based on json response
             for (let i = 0; i < 5; i ++) {
-                let photoel = document.createElement('a-image')
+                let photoel = document.createElement('a-entity')
                 let position = cordinates[i]
                 let rotation = rotations[i]
-                photoel.setAttribute('src', json[i].thumbnailUrl)
-                photoel.setAttribute('position', position.join(' '))
-                photoel.setAttribute('rotation', rotation.join(' '))
+                console.log({pos: position.join(' '), rot: rotation.join(' ')})
+                photoel.setAttribute('sub-component-example', `url: ${json[i].thumbnailUrl}; position: ${position.join(' ')}; rotation: ${rotation.join(' ')}`)
                 this.el.appendChild(photoel)
             }
         })

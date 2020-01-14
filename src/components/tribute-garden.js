@@ -6,12 +6,12 @@ AFRAME.registerComponent('tribute-garden', {
 
         // define some cordinates (these could be defined in api too)
         let coordinates = [
-            [1, 0.5, -2],
-            [-2, 0.5, -4],
-            [-3, 0.5, -3],
-            [0, 0.5, -2],
-            [2, 0.5, -2],
-            [1.5, 0.5, -2]
+            [-1.2, 0.5, -2], // candle
+            [0, 0.5, -2.5],
+            [-1, 0.5, -3], // candle
+            [-0.5, 0.5, -2],
+            [0.5, 0.5, -2],
+            [1.2, 0.5, -2] // photo
         ]
 
 
@@ -20,15 +20,18 @@ AFRAME.registerComponent('tribute-garden', {
         fetch('https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=344935&format=json&cors=1')
         .then(response => response.json())
         .then(json => {
-            // console.log(json)
 
             // create elements based on json response
             json.tributes.forEach((memory, i) => {
-                console.log(memory)
 
                 let tribute = document.createElement('a-entity')
                 let memoryAttributes = 'position: ' + coordinates[i].join(' ')
                 let memoryType = parseInt(memory.tribute.type_id) === 2 ? 'candle' : 'flower'
+
+                // update flower type
+                if(parseInt(memory.tribute.type_id) === 3)
+                    memoryAttributes += '; memory_type: photo'
+
                 tribute.setAttribute(memoryType, memoryAttributes)
                 this.el.appendChild(tribute)
 
