@@ -4,14 +4,27 @@
     <title>A-Frame Demo</title>
     <script type="text/javascript" src="/app.bundle.js"></script>
     <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.rawgit.com/feiss/aframe-environment-component/76b2bbf3/aframe-environment-component.min.js"></script>
 </head>
 <body>
-    <a-scene physics>
-	<a-entity position="0 2.25 -15" particle-system="preset: snow; particleCount: 5000"></a-entity>
-        <a-box position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
-        <!--<a-sky color="#ECECEC"></a-sky>-->
-	 <a-sky src="./img/winter-church-sm.jpg" rotation="0 -20 0"></a-sky>
+    <a-scene physics inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">
+        <!--<a-entity environment="preset: forest; sunPosition: 1 5 -4; groundColor: #742; shadow:true; grid:1x1;"><a-entity>-->
+
+
+    	<a-entity position="0 2.25 -15" particle-system="preset: snow; particleCount: 5000"></a-entity>
+            <a-box position="0 10 -5" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>
+
+            <a-plane src="./img/grass-snow.jpg" position="0 -10 -28" rotation="-90 0 175" repeat="5 5" width="48" height="124" opacity="1.0" transparency=true static-body>
+                <a-box position="-24 0 0" rotation="90 90 90" width="0.5" height="3" depth="124" color="#FFF"></a-box>
+                <a-box position="24 0 0" rotation="90 90 90" width="0.5" height="3" depth="124" color="#FFF"></a-box>
+                <a-box position="0 -62 0" rotation="0 90 90" width="0.5" height="3" depth="48" color="#FFF"></a-box>
+                <a-box position="0 62 0" rotation="0 90 90" width="0.5" height="3" depth="48" color="#FFF"></a-box>
+            </a-plane>
+
+
+
+            <!--<a-sky src="./img/winter-pass.jpg" rotation="0 -20 0"></a-sky>-->
+            <a-sky src="./img/winter-church-sm.jpg" rotation="0 -92 0"></a-sky>
     </a-scene>
 </body>
 </html>
