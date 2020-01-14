@@ -4,7 +4,6 @@ require('aframe')
 /* REQUIRE ANY node_module LEVEL COMPONENTS HERE */
 // require('example-component')
 require('aframe-extras')
-require('axios')
 
 /* LIBS */
 require('./util')
@@ -14,3 +13,5 @@ require('Components/hello-world')
 require('Components/multi-photo-example')
 
 require('Components/tribute-garden')
+require('Components/arborable')
+
