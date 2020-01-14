@@ -1,5 +1,6 @@
 /* AFRAME LIBRARY SHOULD BE THE FIRST THING IMPORTED */
 require('aframe')
+require('aframe-sun-sky');
 
 /* REQUIRE ANY node_module LEVEL COMPONENTS HERE */
 // require('example-component')
@@ -14,7 +15,7 @@ require('Components/hello-world')
 require('Components/multi-photo-example')
 require('Components/flower')
 require('Components/candle')
-require('Components/tribute-garden')
+require('Components/tributes-garden')
 require('./components/headstone-name')
 require('./components/headstone-dates')
 require('./components/headstone-obit')

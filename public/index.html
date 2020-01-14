@@ -4,6 +4,7 @@
     <title>A-Frame Demo</title>
     <script type="text/javascript" src="/app.bundle.js"></script>
     <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
+    <!--    <script src="libs/inflate.min.js"></script>-->
 </head>
 <body>
 <a-scene physics id="mainScene">
@@ -19,7 +20,8 @@
     <!-- <a-plane src="#example_img"></a-plane> -->
 
     <!--        <a-box id="cool_box" position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>-->
-    <a-entity position="-1.2 -0.5 -2" obj-model="obj: #headstone; mtl: #headstonemat" scale="0.2 0.2 0.2" rotation="0 15 0">
+    <a-entity position="-1.2 -0.5 -2" obj-model="obj: #headstone; mtl: #headstonemat" scale="0.2 0.2 0.2"
+              rotation="0 15 0">
         <a-entity headstone-name
                   position="6.2 10.6 -5" scale="5 5 5" rotation="0 0 0">
         </a-entity>
@@ -31,17 +33,10 @@
         </a-entity>
     </a-entity>
 
-    <a-entity tribute-garden></a-entity>
-
+    <a-entity tributes-garden></a-entity>
 
     <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
     <a-sky rotation="0 -20 0" color="#EEEEFF"></a-sky>
-
-    <a-entity id="cameraRig" position="0 2 4">
-        <a-entity camera look-controls wasd-controls>
-        </a-entity>
-    </a-entity>
 </a-scene>
-
 </body>
 </html>

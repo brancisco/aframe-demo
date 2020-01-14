@@ -8,34 +8,33 @@ AFRAME.registerComponent('flower', {
 
         // our assets
         const imageSources = {
-            COMMENT: '/assets/img/red_rose.png',
-            PHOTO: '/assets/img/yellow_rose.png'
+            COMMENT: '/assets/memory-garden/rose.glb',
+            PHOTO: '/assets/memory-garden/lotus.obj'
         }
 
-        let dimensions = {
-            width: 0.2,
-            height: 0.5
+        let model = document.createElement('a-gltf-model')
+
+        if(this.data.memory_type === 'photo'){
+            model = document.createElement('a-obj-model')
+            model.setAttribute('scale', '0.1 0.1 0.1')
+            model.setAttribute('material', 'color: salmon')
+
+            //  <a-entity obj-model="obj: #lotus-obj;" material="color: pink; wave-height: 10" scale="0.1 0.1 0.1" position="0 0 -2" rotate="1 0 -1">
         }
-
-        let flowerGraphic = document.createElement('a-image')
-
-        // set dimensions
-        flowerGraphic.setAttribute('width', dimensions.width)
-        flowerGraphic.setAttribute('height', dimensions.height)
 
         // set position
         if (this.data.position) {
-            flowerGraphic.setAttribute('position', this.data.position)
+            model.setAttribute('position', this.data.position)
         }
 
         // set rotation
         if (this.data.rotation) {
-            flowerGraphic.setAttribute('rotation', this.data.rotation)
+            model.setAttribute('rotation', this.data.rotation)
         }
 
         // set graphic image
-        flowerGraphic.setAttribute('src', imageSources[this.data.memory_type.toUpperCase()])
+        model.setAttribute('src', imageSources[this.data.memory_type.toUpperCase()])
 
-        this.el.appendChild(flowerGraphic)
+        this.el.appendChild(model)
     }
 })

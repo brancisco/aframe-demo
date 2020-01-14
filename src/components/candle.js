@@ -4,30 +4,24 @@ AFRAME.registerComponent('candle', {
         rotation: {type: 'string', default: ''},
     },
     init: function () {
-        let dimensions = {
-            width: 0.2,
-            height: 0.5
-        }
-
-        let graphic = document.createElement('a-image')
-
-        // set dimensions
-        graphic.setAttribute('width', dimensions.width)
-        graphic.setAttribute('height', dimensions.height)
+        let model = document.createElement('a-gltf-model')
 
         // set position
         if (this.data.position) {
-            graphic.setAttribute('position', this.data.position)
+            model.setAttribute('position', this.data.position)
         }
 
         // set rotation
         if (this.data.rotation) {
-            graphic.setAttribute('rotation', this.data.rotation)
+            model.setAttribute('rotation', this.data.rotation)
         }
 
-        // set graphic image
-        graphic.setAttribute('src', '/assets/img/candle.png')
+        // scale down our candle
+        model.setAttribute('scale', '0.1 0.1 0.1')
 
-        this.el.appendChild(graphic)
+        // set graphic image
+        model.setAttribute('src', '/assets/memory-garden/candle.glb')
+
+        this.el.appendChild(model)
     }
 })
