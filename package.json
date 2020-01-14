@@ -15,8 +15,10 @@
         "license": "ISC",
         "dependencies": {
                 "aframe": "^1.0.3",
-                "aframe-particle-system-component": "^1.1.3",
+                "aframe-extras": "^6.0.1",
+                "axios": "^0.19.1",
                 "esm": "^3.2.25",
+                "aframe-particle-system-component": "^1.1.3",
                 "live-server": "^1.2.1"
         },
         "devDependencies": {
