@@ -6,12 +6,12 @@ AFRAME.registerComponent('tribute-garden', {
 
         // define some cordinates (these could be defined in api too)
         let coordinates = [
-            [-1.2, 0.5, -2], // candle
-            [0, 0.5, -2.5],
-            [-1, 0.5, -3], // candle
+            [-0.2, 0.5, -2], // candle
+            [-1, 0.5, -2.5],
+            [0.1, 0.5, -2.1], // candle
             [-0.5, 0.5, -2],
-            [0.5, 0.5, -2],
-            [1.2, 0.5, -2] // photo
+            [-0.75, 0.5, -2],
+            [0.5, 0.5, -2.2] // photo
         ]
 
 

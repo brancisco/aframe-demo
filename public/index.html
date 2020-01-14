@@ -11,21 +11,31 @@
         <!-- HERE WE SHOULD DEFINE OUR ASSETS HERE -->
         <!-- <img id="example_img" src="example.png"> -->
         <!-- <a-asset-item id="example_obj" src="example.obj"></a-asset-item> -->
-
-        <img src="assets/img/red_rose.png" id="flower"/>
-        <img src="assets/img/yellow_rose.png" id="photo"/>
-        <img src="assets/img/candle.png" id="candle"/>
+        <a-asset-item id="headstone" src="assets/headstone.obj"></a-asset-item>
+        <a-asset-item id="headstonemat" src="assets/headstone.mtl"></a-asset-item>
     </a-assets>
 
     <!-- THIS IS HOW WE SHOULD REFERENCE THE ASSETS ABOVE -->
     <!-- <a-plane src="#example_img"></a-plane> -->
 
     <!--        <a-box id="cool_box" position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>-->
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
-    <a-sky rotation="0 -20 0" color="#EEEEFF"></a-sky>
+    <a-entity position="-1.2 -0.5 -2" obj-model="obj: #headstone; mtl: #headstonemat" scale="0.2 0.2 0.2" rotation="0 15 0">
+        <a-entity headstone-name
+                  position="6.2 10.6 -5" scale="5 5 5" rotation="0 0 0">
+        </a-entity>
+        <a-entity headstone-dates
+                  position="6.2 9 -5" scale="3 3 3" rotation="0 0 0">
+        </a-entity>
+        <a-entity headstone-obit
+                  position="6.2 7.8 -5" scale="3 3 3" rotation="0 0 0">
+        </a-entity>
+    </a-entity>
 
     <a-entity tribute-garden></a-entity>
 
+
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
+    <a-sky rotation="0 -20 0" color="#EEEEFF"></a-sky>
 
     <a-entity id="cameraRig" position="0 2 4">
         <a-entity camera look-controls wasd-controls>
