@@ -14,7 +14,7 @@ window.UTILS = {
         return isFloat ? randomNumber : Math.floor(randomNumber)
     },
 
-    getXYTributeCoordinates (shiftX=0, shiftY=0, total=300, meters=18, minRadius=6, closest=1) {
+    getXYTributeCoordinates (shiftX=0, shiftY=0, total=300, meters=18, minRadius=6, closest=1, rng=Math.random) {
         function level (n, meters, total, min) {
             return (meters - min) * ((n)/(total)) + min
         }
@@ -24,7 +24,7 @@ window.UTILS = {
         }
 
         // generate random x, y coordinates
-        let rands = Array(total).fill(0).map(cur => Math.random()*100)
+        let rands = Array(total).fill(0).map(cur => rng()*100)
         // based on i (index) so that the points should start closer and expand out
         let x = Array(total).fill(0).map((cur, i) => Math.sin(rands[i])*level(i, meters, total, minRadius)).reverse()
         let y = Array(total).fill(0).map((cur, i) => Math.cos(rands[i])*level(i, meters, total, minRadius)).reverse()

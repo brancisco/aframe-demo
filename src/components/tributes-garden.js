@@ -1,3 +1,5 @@
+let seedrandom = require('seedrandom')
+
 AFRAME.registerComponent('tributes-garden', {
     schema: {
         // tributes: {type: 'number', default: 0}
@@ -7,18 +9,13 @@ AFRAME.registerComponent('tributes-garden', {
 
         // fetch tributes from api
         const urlParams = new URLSearchParams(window.location.search);
-        // let startingXPos = -3;
-        // let endingXPos = 3;
-        // let xPosStep = 1;
-        // let startingZpos = 25;
-        // let endingZpos = 30;
+
         let startingXPos = -27;
         let endingXPos = 18;
         let startingZpos = -80;
         let endingZpos = 0;
 
-
-        let positions = UTILS.getXYTributeCoordinates(4, -17, 500, 35, 7, 1.75)
+        let positions = UTILS.getXYTributeCoordinates(4, -17, 500, 35, 7, 1.75, seedrandom(urlParams.get('obit_id')))
         fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&types=1,2,3,9&limit=100&status=public,private&format=json&cors=1`)
             .then(response => response.json())
             .then(json => {
