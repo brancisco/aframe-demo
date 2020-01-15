@@ -10,6 +10,8 @@ AFRAME.registerComponent('arborable', {
         let defaults = {
             scale: '0.02 0.02 0.02'
         }
+        // TODO: these should be loaded from the obituary - then make sure we're not placing where
+        // other people have placed tributes before..
         this.positions = []
 
         el.addEventListener('click', (evt) => {
@@ -23,22 +25,28 @@ AFRAME.registerComponent('arborable', {
             }
 
             // add tree tribute
-            // axios({
-            //     method: 'post',
-            //     url: 'https://staging.funeralinnovations.com/obituaries/addTribute&cors=1',
-            //     data: {
-            //         obit_id: -1,
-            //         name: 'John Doe',
-            //         data: '',
-            //         meta: {
-            //             vr_tree_position: pos
-            //         },
-            //         type_id: 9
-            //     }
-            // })
-            // .then(response => {
-            //     console.log(response)
-            // })
+            axios({
+                method: 'post',
+                // headers: {
+                //     'Content-Type': 'text/plain',
+                // },
+                url: 'https://staging.funeralinnovations.com/obituaries/addVRTributes&cors=1',
+                data: {
+                    obit_id: 302592,
+                    name: 'John Doe',
+                    data: '',
+                    meta: {
+                        vr_tree_position: pos
+                    },
+                    email: 'brandon@gmail.com'
+                }
+            })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
 
             // add tree to scene
             this.positions.push(evt.detail.intersection.point)
