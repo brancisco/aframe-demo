@@ -4,7 +4,7 @@ AFRAME.registerComponent('candle', {
         rotation: {type: 'string', default: ''},
     },
     init: function () {
-        let model = document.createElement('a-image');
+        let model = document.createElement('a-obj-model');
 
         // set position
         if (this.data.position) {
@@ -19,10 +19,9 @@ AFRAME.registerComponent('candle', {
         // scale down our candle
         model.setAttribute('scale', '3 3 3');
 
-        model.setAttribute('width', 0.3);
-
-        // set graphic image
-        model.setAttribute('src', '/assets/img/candle.png');
+        // set model sources
+        model.setAttribute('src', '#lantern-obj');
+        model.setAttribute('mtl', '#lantern-mtl');
 
         this.el.appendChild(model)
     }

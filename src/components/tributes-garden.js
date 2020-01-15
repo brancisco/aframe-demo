@@ -7,17 +7,11 @@ AFRAME.registerComponent('tributes-garden', {
 
         // fetch tributes from api
         const urlParams = new URLSearchParams(window.location.search);
-        // let startingXPos = -3;
-        // let endingXPos = 3;
-        // let xPosStep = 1;
-        // let startingZpos = 25;
-        // let endingZpos = 30;
-        let startingXPos = -19;
+        let startingXPos = -18;
         let endingXPos = 18;
-        let xPosStep = 1;
         let startingZpos = -10;
         let endingZpos = -4;
-        fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&types=1,2,3,9&limit=100&status=public,private&format=json&cors=1`)
+        fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&types=1,2,3,9&limit=50&status=public,private&format=json&cors=1`)
             .then(response => response.json())
             .then(json => {
 
@@ -34,15 +28,10 @@ AFRAME.registerComponent('tributes-garden', {
                         let memoryType = typeId === 2 ? 'candle' : 'flower';
 
                         let position = {
-                            x: (startingXPos + (i * xPosStep)),
+                            x: UTILS.randomNumberFromInterval(startingXPos, endingXPos, true),
                             y: -3.52,
                             z: UTILS.randomNumberFromInterval(startingZpos, endingZpos, true).toFixed(2)
                         };
-
-                        // check x bounds
-                        if (position.x > endingXPos) {
-                            position.x = UTILS.randomNumberFromInterval(startingXPos, endingXPos, true).toFixed(2)
-                        }
 
                         // check for tree memory
                         if (typeId === 9 && trib.tribute.data.meta.vr_tree_position) {
@@ -73,9 +62,12 @@ AFRAME.registerComponent('tributes-garden', {
                                 scale.z = 1
                             }
 
-                            model.setAttribute('scale', scale);
+                            model.setAttribute('scale', scale)
+                        }
 
-                            console.log(position.x)
+                        // place candle on the floor
+                        if (typeId === 2) {
+                            position.y = -2.09
                         }
 
                         // set position
