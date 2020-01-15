@@ -6,11 +6,11 @@ AFRAME.registerComponent('tributes-garden', {
 
         // fetch tributes from api
         const urlParams = new URLSearchParams(window.location.search);
-        let startingXPos = -2;
-        let endingXPos = 2;
-        let xPosStep = 0.5;
-        let startingZpos = -1.7;
-        let endingZpos = -1;
+        let startingXPos = -3;
+        let endingXPos = 3;
+        let xPosStep = 1;
+        let startingZpos = -1;
+        let endingZpos = 0;
         fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&format=json&cors=1`)
             .then(response => response.json())
             .then(json => {
@@ -28,7 +28,7 @@ AFRAME.registerComponent('tributes-garden', {
 
                         let position = {
                             x: (startingXPos + (i * xPosStep)),
-                            y: 0.5,
+                            y: 0,
                             z: UTILS.randomNumberFromInterval(startingZpos, endingZpos, true).toFixed(2)
                         };
 
