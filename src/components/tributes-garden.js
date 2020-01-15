@@ -22,6 +22,10 @@ AFRAME.registerComponent('tributes-garden', {
             PHOTO: 3
         }
 
+        let startingXPos = -0.2
+        let endingXPos = 2
+        let startingZpos = -1.7
+        let endingZpos = 1
         fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&format=json&cors=1`)
             .then(response => response.json())
             .then(json => {
@@ -38,24 +42,22 @@ AFRAME.registerComponent('tributes-garden', {
                         let memoryType = parseInt(trib.tribute.type_id) === 2 ? 'candle' : 'flower'
 
                         let position = {
-                            x: null,
+                            x: startingXPos * i,
                             y: 0.5,
-                            z: UTILS.randomNumberFromInterval(-1.7, 1, true).toFixed(2)
-                        };
-
-                        // set tribute graphics as well as grouped positions
-                        if (parseInt(trib.tribute.type_id) === tributeTypes.CANDLE) {
-                            position.x = UTILS.randomNumberFromInterval(-1, 1, true).toFixed(2)
-                        } else if (parseInt(trib.tribute.type_id) === tributeTypes.COMMENT) {
-                            position.x = UTILS.randomNumberFromInterval(-2, -1, true).toFixed(2)
-                        } else if (parseInt(trib.tribute.type_id) === tributeTypes.PHOTO) {
-                            position.x = UTILS.randomNumberFromInterval(0, 1, true).toFixed(2)
+                            z: UTILS.randomNumberFromInterval(startingZpos, endingZpos, true).toFixed(2)
                         }
+
+                        // check if we've gone past our starting bounds
+                        if(position.x < startingXPos)
+                            position.x -= startingXPos
+
+                        position.x++
 
                         // set position
                         memory.setAttribute('position', position)
 
                         let rotation = [0, UTILS.randomNumberFromInterval(-180, 180), 0]
+
 
                         // set rotation so that flower aren't always facing same direction
                         memory.setAttribute('rotation', rotation.join(' '))
@@ -67,7 +69,7 @@ AFRAME.registerComponent('tributes-garden', {
                         // update memory attributes
                         memory.setAttribute(memoryType, memoryAttributes)
 
-                        memory.setAttribute('startic-body', 'shape: auto')
+                        memory.setAttribute('static-body', 'shape: none')
 
                         this.el.appendChild(memory)
                     }
