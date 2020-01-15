@@ -14,7 +14,10 @@
             <!-- <a-asset-item id="example_obj" src="example.obj"></a-asset-item> -->
             <a-asset-item id="headstone" src="assets/headstone.obj"></a-asset-item>
             <a-asset-item id="headstonemat" src="assets/headstone.mtl"></a-asset-item>
+            <a-asset-item id="tree-obj" src="models/trees/tree.obj"></a-asset-item>
+            <a-asset-item id="tree-mtl" src="models/trees/tree.mtl"></a-asset-item>
         </a-assets>
+        <a-camera look-controls><a-cursor></a-cursor></a-camera>
         <!-- THIS IS HOW WE SHOULD REFERENCE THE ASSETS ABOVE -->
         <!-- <a-plane src="#example_img"></a-plane> -->
         <a-entity position="0 2.25 -15" particle-system="preset: snow; particleCount: 5000"></a-entity>
@@ -30,7 +33,7 @@
                 position="2.4 5.8 -2.3" scale="3.7 3.7 3.7" rotation="0 0 0">
             </a-entity>
         </a-entity>
-        <a-plane src="./img/grass-snow.jpg" position="0 -10 -28" rotation="-90 0 175" repeat="5 5" width="48" height="124" opacity="1.0" transparency=true static-body>
+        <a-plane arborable src="./img/grass-snow.jpg" position="0 -10 -28" rotation="-90 0 175" repeat="5 5" width="48" height="124" opacity="1.0" transparency=true static-body>
             <a-box position="-24 0 0" rotation="90 90 90" width="0.5" height="3" depth="124" color="#FFF"></a-box>
             <a-box position="24 0 0" rotation="90 90 90" width="0.5" height="3" depth="124" color="#FFF"></a-box>
             <a-box position="0 -62 0" rotation="0 90 90" width="0.5" height="3" depth="48" color="#FFF"></a-box>
