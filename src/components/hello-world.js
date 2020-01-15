@@ -4,11 +4,11 @@ AFRAME.registerComponent('hello-world', {
         console.log(UTILS.formatProps([
             {
                 name: 'my-prop-name',
-                value: '4 3 2' 
+                value: '4 3 2'
             },
             {
                 name: 'cool-prop',
-                value: 'hello this is a prop' 
+                value: 'hello this is a prop'
             }
         ]))
     }
