@@ -15,5 +15,6 @@ require('./components/multi-photo-example')
 require('./components/headstone-name')
 require('./components/headstone-dates')
 require('./components/headstone-obit')
+require('./components/headstone-photo')
 require('./components/tribute-garden')
 require('aframe-particle-system-component');
