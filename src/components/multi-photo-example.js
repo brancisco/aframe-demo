@@ -27,13 +27,11 @@ AFRAME.registerComponent('multi-photo-example', {
         fetch('https://jsonplaceholder.typicode.com/photos')
         .then(response => response.json())
         .then(json => {
-            console.log(json)
             // create elements based on json response
             for (let i = 0; i < 5; i ++) {
                 let photoel = document.createElement('a-entity')
                 let position = cordinates[i]
                 let rotation = rotations[i]
-                console.log({pos: position.join(' '), rot: rotation.join(' ')})
                 photoel.setAttribute('sub-component-example', `url: ${json[i].thumbnailUrl}; position: ${position.join(' ')}; rotation: ${rotation.join(' ')}`)
                 this.el.appendChild(photoel)
             }

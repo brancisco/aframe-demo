@@ -12,7 +12,7 @@ AFRAME.registerComponent('headstone-dates', {
             let deceased_date = json.obituary.deceased_date.substring(5,7) + "-" + json.obituary.deceased_date.substring(8,10) + "-" + json.obituary.deceased_date.substring(0,4);
             // create element based on json response
             let datetext = document.createElement('a-entity')
-            datetext.setAttribute('text', "font: kelsonsans; value: " + birth_date + " - " + deceased_date + "; color: #000; align: center; wrapCount: 14; baseline: top")
+            datetext.setAttribute('text', "font: aileronsemibold; value: " + birth_date + " - " + deceased_date + "; color: #000; align: center; wrapCount: 9; baseline: top; lineHeight: 25")
             this.el.appendChild(datetext)
         })
     }

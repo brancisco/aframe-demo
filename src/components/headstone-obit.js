@@ -10,7 +10,7 @@ AFRAME.registerComponent('headstone-obit', {
             console.log(json)
             // create element based on json response
             let obittext = document.createElement('a-entity')
-            obittext.setAttribute('text', "font: kelsonsans; value: " + json.obituary.about.substring(0, 100) + "...; color: #000; align: center; wrapCount: 18; baseline: top")
+            obittext.setAttribute('text', "font: aileronsemibold; value: " + json.obituary.about.substring(0, 100) + "...; color: #000; align: center; wrapCount: 18; baseline: top")
             this.el.appendChild(obittext)
         })
     }

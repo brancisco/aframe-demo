@@ -16,12 +16,10 @@
         "dependencies": {
                 "aframe": "^1.0.3",
                 "aframe-extras": "^6.0.1",
-                "aframe-sun-sky": "^3.0.3",
                 "axios": "^0.19.1",
                 "esm": "^3.2.25",
-                "live-server": "^1.2.1",
-                "three-fbxloader-offical": "^1.0.0",
-                "zlib": "^1.0.5"
+                "aframe-particle-system-component": "^1.1.3",
+                "live-server": "^1.2.1"
         },
         "devDependencies": {
                 "webpack": "^4.41.5",
