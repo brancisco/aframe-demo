@@ -11,7 +11,7 @@ AFRAME.registerComponent('tributes-garden', {
         let xPosStep = 1;
         let startingZpos = -1;
         let endingZpos = 0;
-        fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&format=json&cors=1`)
+        fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&types=1,2,3,9&status=public,private&format=json&cors=1`)
             .then(response => response.json())
             .then(json => {
 
@@ -20,9 +20,10 @@ AFRAME.registerComponent('tributes-garden', {
                     let typeId = parseInt(trib.tribute.type_id);
 
                     // only care for comments, candles and photo tributes
-                    if ([1, 2, 3].includes(typeId)) {
+                    if ([1, 2, 3, 9].includes(typeId)) {
+
                         // create our tribute
-                        let memory = document.createElement('a-entity');
+                        let model = document.createElement('a-entity');
                         let memoryAttributes = '';
                         let memoryType = typeId === 2 ? 'candle' : 'flower';
 
@@ -37,19 +38,27 @@ AFRAME.registerComponent('tributes-garden', {
                             position.x = UTILS.randomNumberFromInterval(startingXPos, endingXPos, true).toFixed(2)
                         }
 
+                        // check for tree memory
+                        if (typeId === 9 && trib.tribute.data.meta.vr_tree_position) {
+                            position = trib.tribute.data.meta.vr_tree_position;
+                            model = document.createElement('a-obj-model');
+                            model.setAttribute('src', '#tree-obj');
+                            model.setAttribute('mtl', '#tree-mtl')
+                        }
+
                         // set position
-                        memory.setAttribute('position', position);
+                        model.setAttribute('position', position);
 
                         // update flower type
                         if (parseInt(trib.tribute.type_id) === 3)
                             memoryAttributes += 'memory_type: photo';
 
                         // update memory attributes
-                        memory.setAttribute(memoryType, memoryAttributes);
+                        model.setAttribute(memoryType, memoryAttributes);
 
-                        memory.setAttribute('static-body', 'shape: none');
+                        model.setAttribute('static-body', 'shape: none');
 
-                        this.el.appendChild(memory)
+                        this.el.appendChild(model)
                     }
                 })
             })
