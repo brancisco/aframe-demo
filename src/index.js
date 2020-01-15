@@ -4,6 +4,7 @@ require('aframe')
 /* REQUIRE ANY node_module LEVEL COMPONENTS HERE */
 // require('example-component')
 require('aframe-extras')
+require('aframe-particle-system-component');
 
 /* LIBS */
 require('./util')
@@ -15,3 +16,7 @@ require('Components/multi-photo-example')
 require('Components/tribute-garden')
 require('Components/arborable')
 
+require('Components/headstone-name')
+require('Components/headstone-dates')
+require('Components/headstone-obit')
+require('Components/tribute-garden')
