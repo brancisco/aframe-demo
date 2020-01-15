@@ -8,8 +8,8 @@ AFRAME.registerComponent('flower', {
 
         // our assets
         const imageSources = {
-            COMMENT: '/assets/img/red_rose.png',
-            PHOTO: '/assets/img/yellow_rose.png'
+            COMMENT: '#red-rose',
+            PHOTO: '#yellow-rose'
         };
 
         let model = document.createElement('a-image');
