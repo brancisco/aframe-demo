@@ -21,8 +21,10 @@
         <!-- <a-plane src="#example_img"></a-plane> -->
         <a-entity position="0 2.25 -15" particle-system="preset: snow; particleCount: 5000"></a-entity>
 
-        <a-entity tributes-garden></a-entity>
-        <a-plane arborable src="./img/grass-snow.jpg" position="0 -5 -28" rotation="-90 0 175" repeat="5 5" width="48" height="124" opacity="1.0" transparency=true static-body>
+        <a-plane arborable src="./img/grass-snow.jpg" position="0 -5 -28" rotation="-90 0 175" repeat="5 5" width="48"
+                 height="124" opacity="1.0" transparency=true static-body>
+
+            <a-entity rotation="270 180 0" tributes-garden></a-entity>
 
             <a-entity obj-model="obj: #headstone; mtl: #headstonemat" position="-2 12 0" rotation="270 180 0"
                       scale="1 1 1">
