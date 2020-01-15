@@ -1,6 +1,6 @@
 // function to decide how far from the middle to place the coordinates
-function level (n, meters, total) {
-  return n*(meters)/total
+function level (n, meters, total, min) {
+  return (meters - min) * ((n)/(total)) + min
 }
 
 // function to determin distance between two points
@@ -14,14 +14,15 @@ Math.seedrandom('my random seed')
 
 // parameters
 let total = 500
-let meters = 30
-let closest = 1
+let meters = 35
+let closest = 1.7
+let minRadius = 7
 
 // generate random x, y coordinates
-let rands = Array(total).fill(0).map(cur => Math.random()*100)
+let rands = Array(total).fill(0).map(cur => Math.random()*2*Math.PI)
 // based on i (index) so that the points should start closer and expand out
-let x = Array(total).fill(0).map((cur, i) => Math.sin(rands[i])*level(i, meters, total))
-let y = Array(total).fill(0).map((cur, i) => Math.cos(rands[i])*level(i, meters, total))
+let x = Array(total).fill(0).map((cur, i) => Math.sin(rands[i])*level(i, meters, total, minRadius)).reverse()
+let y = Array(total).fill(0).map((cur, i) => Math.cos(rands[i])*level(i, meters, total, minRadius)).reverse()
 
 // conntainers for good positions and bad positions (too close to other points)
 let finalX = []
@@ -50,19 +51,18 @@ for (let i = 0; i < x.length; i ++) {
     badY.push(y[i])
   }
 }
-
 // graph below
 
 var trace1 = {
-  x: finalX,
-  y: finalY,
+  x: finalX.reverse(),
+  y: finalY.reverse(),
   mode: 'markers',
   type: 'scatter'
 };
 
 var trace2 = {
-  x: badX,
-  y: badY,
+  x: badX.reverse(),
+  y: badY.reverse(),
   mode: 'markers',
   type: 'scatter'
 };
