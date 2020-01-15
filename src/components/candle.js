@@ -4,7 +4,7 @@ AFRAME.registerComponent('candle', {
         rotation: {type: 'string', default: ''},
     },
     init: function () {
-        let model = document.createElement('a-gltf-model')
+        let model = document.createElement('a-gltf-model');
 
         // set position
         if (this.data.position) {
@@ -17,11 +17,11 @@ AFRAME.registerComponent('candle', {
         }
 
         // scale down our candle
-        model.setAttribute('scale', '0.1 0.1 0.1')
+        model.setAttribute('scale', '0.1 0.1 0.1');
 
         // set graphic image
-        model.setAttribute('src', '/assets/memory-garden/candle.glb')
+        model.setAttribute('src', '/models/memory-garden/candle.glb');
 
         this.el.appendChild(model)
     }
-})
+});

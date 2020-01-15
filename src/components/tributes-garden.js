@@ -40,12 +40,6 @@ AFRAME.registerComponent('tributes-garden', {
                         // set position
                         memory.setAttribute('position', position);
 
-                        let rotation = [0, UTILS.randomNumberFromInterval(-180, 180), 0];
-
-
-                        // set rotation so that flower aren't always facing same direction
-                        memory.setAttribute('rotation', rotation.join(' '));
-
                         // update flower type
                         if (parseInt(trib.tribute.type_id) === 3)
                             memoryAttributes += 'memory_type: photo';
