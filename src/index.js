@@ -20,4 +20,5 @@ require('Components/arborable')
 require('Components/headstone-name')
 require('Components/headstone-dates')
 require('Components/headstone-obit')
+require('Components/headstone-photo')
 require('aframe-particle-system-component');
