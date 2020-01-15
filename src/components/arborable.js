@@ -1,19 +1,17 @@
-import axios from 'axios'
-
 AFRAME.registerComponent('arborable', {
     schema: {
-        scaleFrom: { type: 'vec3', default: { x: 0.02, y: 0.02, z: 0.02 } },
-        scaleTo: { type: 'vec3', default: { x: 0.1, y: 0.1, z: 0.1 } },
-        nTrees: { type: 'int', default: 1 }
+        scaleFrom: {type: 'vec3', default: {x: 0.02, y: 0.02, z: 0.02}},
+        scaleTo: {type: 'vec3', default: {x: 0.1, y: 0.1, z: 0.1}},
+        nTrees: {type: 'int', default: 1}
     },
     init: function () {
         let scene = this.el.sceneEl;
         let el = this.el;
-        let minDistanceBetweeen = 2.5
+        let minDistanceBetweeen = 2.5;
         // TODO: these should be loaded from the obituary - then make sure we're not placing where
         // other people have placed tributes before..
         this.positions = [];
-        this.treePlanted = 0
+        this.treePlanted = 0;
 
         el.addEventListener('click', (evt) => {
             let pos = evt.detail.intersection.point;
@@ -29,7 +27,7 @@ AFRAME.registerComponent('arborable', {
                     return
                 }
             }
-            this.treePlanted += 1
+            this.treePlanted += 1;
 
             // add tree tribute
             /*

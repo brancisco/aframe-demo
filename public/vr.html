@@ -18,17 +18,18 @@
             <a-asset-item id="tree-obj" src="models/trees/tree.obj"></a-asset-item>
             <a-asset-item id="tree-mtl" src="models/trees/tree.mtl"></a-asset-item>
             <a-asset-item id="fence" src="models/fence/fence_white.obj"></a-asset-item>
+            <a-asset-item id="lantern-obj" src="models/memory-garden/lantern.obj"></a-asset-item>
+            <a-asset-item id="lantern-mtl" src="models/memory-garden/lantern.mtl"></a-asset-item>
         </a-assets>
         <!-- THIS IS HOW WE SHOULD REFERENCE THE ASSETS ABOVE -->
         <!-- <a-plane src="#example_img"></a-plane> -->
         <a-entity position="0 2.25 -15" particle-system="preset: snow; particleCount: 5000"></a-entity>
-
         <a-plane arborable src="./img/grass-snow.jpg" position="0 -5 -28" rotation="-90 0 175" repeat="5 5" width="48"
                  height="124" opacity="1.0" transparency=true static-body>
 
             <a-entity rotation="270 180 0" tributes-garden></a-entity>
 
-            <a-entity obj-model="obj: #headstone; mtl: #headstonemat" position="-2 12 0" rotation="270 180 0"
+            <a-entity obj-model="obj: #headstone; mtl: #headstonemat" position="-2 12 0" rotation="-80 -90 -90"
                       scale="1 1 1">
                 <a-plane position="2.4 6.6 -2.3" width="4" height="7" color="#999" transparent="true" opacity="0.6"
                          static-body></a-plane>

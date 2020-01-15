@@ -15,8 +15,9 @@ AFRAME.registerComponent('tributes-garden', {
         let startingZpos = -80;
         let endingZpos = 0;
 
-        let positions = UTILS.getXYTributeCoordinates(4, -17, 500, 35, 7, 1.75, seedrandom(urlParams.get('obit_id')))
-        fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&types=1,2,3,9&limit=100&status=public,private&format=json&cors=1`)
+        let positions = UTILS.getXYTributeCoordinates(4, -17, 400, 35, 7, 1.75, seedrandom(urlParams.get('obit_id')))
+
+        fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&types=1,2,3,9&limit=50&status=public,private&format=json&cors=1`)
             .then(response => response.json())
             .then(json => {
 
@@ -60,33 +61,33 @@ AFRAME.registerComponent('tributes-garden', {
                             model.setAttribute('mtl', '#tree-mtl');
 
                             // scale tree based on its age
-                            let scale = {x: 0, y: 0, z: 0};
+                            let scale = {x: 0.1, y: 0.1, z: 0.1};
 
                             // Tree growth simulation. We're using a 10 hr window for quick progression of growth
                             // given server and client timezone are different counting in hours might be a bit off
-                            let maturityTime = 24 * 7; // in hrs (1 week)
+                            let maturityTime = 10; // in hrs
                             let birthDate = new Date(trib.tribute.datetime);
                             let today = new Date();
                             let elapsedTime = today - birthDate;
                             let elapsedHours = Math.floor(elapsedTime / 1000 / 60 / 60);
-                            let ratio = (elapsedHours / maturityTime) < 1 ? (elapsedHours / maturityTime) : 1;
-                            let initScale = 0.15
-                            let maxScale = 0.45
-                            let normalizedSize = (maxScale - initScale) * ratio + initScale 
+
                             // scale up each hour
-                            if (normalizedSize < maxScale) {
-                                scale.x += normalizedSize
-                                scale.y += normalizedSize
-                                scale.z += normalizedSize
-                            } else {
-                                scale.x = maxScale
-                                scale.y = maxScale
-                                scale.z = maxScale
+                            if (elapsedHours >= 0 && elapsedHours < maturityTime) {
+                                scale.x += elapsedHours * 0.1;
+                                scale.y += elapsedHours * 0.1;
+                                scale.z += elapsedHours * 0.1
+                            } else if (elapsedHours > maturityTime) {
+                                scale.x = 1;
+                                scale.y = 1;
+                                scale.z = 1
                             }
 
-                            model.setAttribute('scale', scale);
+                            model.setAttribute('scale', scale)
+                        }
 
-                            console.log(position.x)
+                        // place candle on the floor
+                        if (typeId === 2) {
+                            position.y = -2.09
                         }
 
                         // set position
