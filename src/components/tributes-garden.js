@@ -46,25 +46,28 @@ AFRAME.registerComponent('tributes-garden', {
                             model.setAttribute('mtl', '#tree-mtl');
 
                             // scale tree based on its age
-                            let scale = {x: 0.1, y: 0.1, z: 0.1};
+                            let scale = {x: 0, y: 0, z: 0};
 
                             // Tree growth simulation. We're using a 10 hr window for quick progression of growth
                             // given server and client timezone are different counting in hours might be a bit off
-                            let maturityTime = 10; // in hrs
+                            let maturityTime = 24 * 7; // in hrs (1 week)
                             let birthDate = new Date(trib.tribute.datetime);
                             let today = new Date();
                             let elapsedTime = today - birthDate;
                             let elapsedHours = Math.floor(elapsedTime / 1000 / 60 / 60);
-
+                            let ratio = (elapsedHours / maturityTime) < 1 ? (elapsedHours / maturityTime) : 1;
+                            let initScale = 0.15
+                            let maxScale = 0.45
+                            let normalizedSize = (maxScale - initScale) * ratio + initScale 
                             // scale up each hour
-                            if (elapsedHours >= 0 && elapsedHours < maturityTime) {
-                                scale.x += elapsedHours * 0.1;
-                                scale.y += elapsedHours * 0.1;
-                                scale.z += elapsedHours * 0.1
+                            if (normalizedSize < maxScale) {
+                                scale.x += normalizedSize
+                                scale.y += normalizedSize
+                                scale.z += normalizedSize
                             } else {
-                                scale.x = 1;
-                                scale.y = 1;
-                                scale.z = 1
+                                scale.x = maxScale
+                                scale.y = maxScale
+                                scale.z = maxScale
                             }
 
                             model.setAttribute('scale', scale)
