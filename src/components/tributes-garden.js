@@ -12,17 +12,24 @@ AFRAME.registerComponent('tributes-garden', {
         // let xPosStep = 1;
         // let startingZpos = 25;
         // let endingZpos = 30;
-        let startingXPos = -19;
+        let startingXPos = -27;
         let endingXPos = 18;
-        let xPosStep = 1;
-        let startingZpos = -10;
-        let endingZpos = -4;
+        let startingZpos = -80;
+        let endingZpos = 0;
+
+
+        let positions = UTILS.getXYTributeCoordinates(4, -17, 500, 35, 7, 1.75)
         fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&types=1,2,3,9&limit=100&status=public,private&format=json&cors=1`)
             .then(response => response.json())
             .then(json => {
 
                 // create elements based on json response
-                json.tributes.forEach((trib, i) => {
+                let i = 0
+                for (let trib of json.tributes) {
+                    // if there are more tributes than there are positions just break
+                    if (i > json.tributes.length) {
+                        break
+                    }
                     let typeId = parseInt(trib.tribute.type_id);
 
                     // only care for comments, candles and photo tributes
@@ -33,16 +40,20 @@ AFRAME.registerComponent('tributes-garden', {
                         let memoryAttributes = '';
                         let memoryType = typeId === 2 ? 'candle' : 'flower';
 
-                        let position = {
-                            x: (startingXPos + (i * xPosStep)),
-                            y: -3.52,
-                            z: UTILS.randomNumberFromInterval(startingZpos, endingZpos, true).toFixed(2)
-                        };
-
                         // check x bounds
-                        if (position.x > endingXPos) {
-                            position.x = UTILS.randomNumberFromInterval(startingXPos, endingXPos, true).toFixed(2)
+                        while (positions.x[i] > endingXPos || positions.x[i] < startingXPos ||
+                               positions.y[i] > endingZpos || positions.y[i] < startingZpos) {
+                            i ++
+                            if (i >= json.tributes.length) {
+                                break
+                            }
                         }
+
+                        let position = {
+                            x: positions.x[i],
+                            y: -3.52,
+                            z: positions.y[i]
+                        };
 
                         // check for tree memory
                         if (typeId === 9 && trib.tribute.data.meta.vr_tree_position) {
@@ -75,7 +86,7 @@ AFRAME.registerComponent('tributes-garden', {
                                 scale.y = maxScale
                                 scale.z = maxScale
                             }
-                            
+
                             model.setAttribute('scale', scale);
 
                             console.log(position.x)
@@ -94,8 +105,9 @@ AFRAME.registerComponent('tributes-garden', {
                         model.setAttribute('static-body', 'shape: none');
 
                         scene.appendChild(model)
+                        i ++
                     }
-                })
+                }
             })
     }
 });
