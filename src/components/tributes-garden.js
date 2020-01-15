@@ -49,11 +49,12 @@ AFRAME.registerComponent('tributes-garden', {
                             let scale = {x: 0.1, y: 0.1, z: 0.1};
 
                             // Tree growth simulation. We're using a 10 hr window for quick progression of growth
+                            // given server and client timezone are different counting in hours might be a bit off
                             let maturityTime = 10; // in hrs
                             let birthDate = new Date(trib.tribute.datetime);
                             let today = new Date();
                             let elapsedTime = today - birthDate;
-                            let elapsedHours = Math.floor(Math.abs(elapsedTime / 1000 / 60 / 60));
+                            let elapsedHours = Math.floor(elapsedTime / 1000 / 60 / 60);
 
                             // scale up each hour
                             if (elapsedHours >= 0 && elapsedHours < maturityTime) {
