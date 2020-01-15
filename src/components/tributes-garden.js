@@ -3,15 +3,21 @@ AFRAME.registerComponent('tributes-garden', {
         // tributes: {type: 'number', default: 0}
     },
     init: function () {
+        const scene = this.el.sceneEl;
 
         // fetch tributes from api
         const urlParams = new URLSearchParams(window.location.search);
-        let startingXPos = -3;
-        let endingXPos = 3;
+        // let startingXPos = -3;
+        // let endingXPos = 3;
+        // let xPosStep = 1;
+        // let startingZpos = 25;
+        // let endingZpos = 30;
+        let startingXPos = -19;
+        let endingXPos = 18;
         let xPosStep = 1;
-        let startingZpos = -1;
-        let endingZpos = 0;
-        fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&types=1,2,3,9&status=public,private&format=json&cors=1`)
+        let startingZpos = -10;
+        let endingZpos = -4;
+        fetch(`https://staging.funeralinnovations.com/obituaries/getTributes?obit_id=${urlParams.get('obit_id')}&types=1,2,3,9&limit=100&status=public,private&format=json&cors=1`)
             .then(response => response.json())
             .then(json => {
 
@@ -29,7 +35,7 @@ AFRAME.registerComponent('tributes-garden', {
 
                         let position = {
                             x: (startingXPos + (i * xPosStep)),
-                            y: 0,
+                            y: -3.52,
                             z: UTILS.randomNumberFromInterval(startingZpos, endingZpos, true).toFixed(2)
                         };
 
@@ -61,13 +67,15 @@ AFRAME.registerComponent('tributes-garden', {
                                 scale.x += elapsedHours * 0.1;
                                 scale.y += elapsedHours * 0.1;
                                 scale.z += elapsedHours * 0.1
-                            } else {
+                            } else if (elapsedHours > maturityTime) {
                                 scale.x = 1;
                                 scale.y = 1;
                                 scale.z = 1
                             }
 
-                            model.setAttribute('scale', scale)
+                            model.setAttribute('scale', scale);
+
+                            console.log(position.x)
                         }
 
                         // set position
@@ -82,7 +90,7 @@ AFRAME.registerComponent('tributes-garden', {
 
                         model.setAttribute('static-body', 'shape: none');
 
-                        this.el.appendChild(model)
+                        scene.appendChild(model)
                     }
                 })
             })

@@ -15,6 +15,7 @@ AFRAME.registerComponent('flower', {
         let model = document.createElement('a-image');
 
         model.setAttribute('width', 0.5);
+        model.setAttribute('scale', '3 3 3');
 
         // set position
         if (this.data.position) {
