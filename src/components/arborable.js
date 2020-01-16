@@ -30,15 +30,11 @@ AFRAME.registerComponent('arborable', {
             this.treePlanted += 1;
 
             // add tree tribute
-            /*
-            axios({
-                method: 'get',
-                headers: {
-                     'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                url: 'https://staging.funeralinnovations.com/obituaries/addVRTribute?cors=1',
-                data: {
-                    obit_id: 302592,
+            const urlParams = new URLSearchParams(window.location.search);
+            const axios = require('axios');
+            axios.get('https://staging.funeralinnovations.com/obituaries/addVRTribute?cors=1', {
+                params: {
+                    obit_id: urlParams.get('obit_id'),
                     name: 'John Doe',
                     data: '',
                     meta: {
@@ -47,32 +43,12 @@ AFRAME.registerComponent('arborable', {
                     email: 'brandon@gmail.com'
                 }
             })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-            */
-
-            // const urlParams = new URLSearchParams(window.location.search);
-            // axios.get('https://staging.funeralinnovations.com/obituaries/addVRTribute?cors=1', {
-            //     params: {
-            //         obit_id: urlParams.get('obit_id'),
-            //         name: 'John Doe',
-            //         data: '',
-            //         meta: {
-            //             vr_tree_position: pos
-            //         },
-            //         email: 'brandon@gmail.com'
-            //     }
-            // })
-            //     .then(response => {
-            //         console.log(response)
-            //     })
-            //     .catch(error => {
-            //         console.log(error)
-            //     });
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                });
 
             // add tree to scene
             this.positions.push(evt.detail.intersection.point);
