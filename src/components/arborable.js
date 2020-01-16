@@ -12,8 +12,8 @@ AFRAME.registerComponent('arborable', {
         // other people have placed tributes before..
         this.positions = [];
         this.treePlanted = 0;
-
-        el.addEventListener('click', (evt) => {
+        var self = this
+        this.clickHandler = function (evt) {
             let pos = evt.detail.intersection.point;
             // if y not on the ground plane
             if (+(pos.y.toFixed(2)) < -5.02 || +(pos.y.toFixed(2)) > -4.98) {
@@ -21,13 +21,13 @@ AFRAME.registerComponent('arborable', {
             }
 
             // if too close to another tree or there has been another tree planted
-            for (let p of this.positions) {
+            for (let p of self.positions) {
                 if (UTILS.distance(pos.x, pos.z, p.x, p.z) < minDistanceBetweeen ||
-                    this.treePlanted >= this.data.nTrees) {
+                    self.treePlanted >= self.data.nTrees) {
                     return
                 }
             }
-            this.treePlanted += 1;
+            self.treePlanted += 1;
 
             // add tree tribute
             /*
@@ -75,17 +75,23 @@ AFRAME.registerComponent('arborable', {
             //     });
 
             // add tree to scene
-            this.positions.push(evt.detail.intersection.point);
+            self.positions.push(evt.detail.intersection.point);
             let tree = document.createElement('a-obj-model');
-            tree.setAttribute('scale', Object.values(this.data.scaleFrom).join(' '));
+            tree.setAttribute('scale', Object.values(self.data.scaleFrom).join(' '));
             tree.setAttribute('position', Object.values(evt.detail.intersection.point).join(' '));
             tree.setAttribute('rotation', '0 ' + Math.floor(Math.random() * 360) + ' 0');
 
             // todo: the src and mtl should be passed as a parameter in the schema
             tree.setAttribute('src', '#tree-obj');
             tree.setAttribute('mtl', '#tree-mtl');
-            tree.setAttribute('animation', `property: scale; to: ${Object.values(this.data.scaleTo).join(' ')}; loop: false; dur: 3000`);
+            tree.setAttribute('animation', `property: scale; to: ${Object.values(self.data.scaleTo).join(' ')}; loop: false; dur: 3000`);
             scene.appendChild(tree)
-        });
+        }
+        el.addEventListener('click', this.clickHandler)
+    },
+    remove () {
+        if (this.clickHandler) {
+            this.el.removeEventListner('click', this.clickHandler)
+        }
     }
 });
