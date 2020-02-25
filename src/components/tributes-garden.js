@@ -72,8 +72,8 @@ AFRAME.registerComponent('tributes-garden', {
                             let elapsedHours = Math.floor(elapsedTime / 1000 / 60 / 60);
 
                             let ratio = (elapsedHours / maturityTime) < 1 ? (elapsedHours / maturityTime) : 1;
-                            let initScale = 0.15
-                            let maxScale = 0.45
+                            let initScale = 0.3
+                            let maxScale = 0.4
                             let normalizedSize = (maxScale - initScale) * ratio + initScale 
 
                             // scale up each hour
@@ -92,11 +92,15 @@ AFRAME.registerComponent('tributes-garden', {
 
                         // place candle on the floor
                         if (typeId === 2) {
-                            position.y = -2.09
+                            position.y = -2
+                        }
+                        else if ([1, 3].includes(typeId)) {
+                            position.y = -5
+                            model.setAttribute('rotation', [Math.random()*5*UTILS.randomSign(), UTILS.randomSign()*Math.random()*60, Math.random()*5*UTILS.randomSign()].join(' '))
                         }
 
                         // set position
-                        model.setAttribute('position', position);
+                        model.setAttribute('position', Object.values(position).join(' '));
 
                         // update flower type
                         if (parseInt(trib.tribute.type_id) === 3)

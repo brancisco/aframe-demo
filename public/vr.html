@@ -3,14 +3,15 @@
 <head>
     <title>VR Obituary Demo</title>
     <script type="text/javascript" src="/app.bundle.js"></script>
-    <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
     <script src="https://cdn.rawgit.com/feiss/aframe-environment-component/76b2bbf3/aframe-environment-component.min.js"></script>
 </head>
 <body>
-    <a-scene physics inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">
+    <a-scene inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">
         <a-assets>
             <!-- HERE WE SHOULD DEFINE OUR ASSETS HERE -->
             <!-- <img id="example_img" src="example.png"> -->
+            <img id="sky-image" src="img/winter-church-sm.jpg">
+            <img id="grass-snow" src="img/grass-snow.jpg">
             <img id="red-rose" src="assets/img/red_rose_small.png">
             <img id="yellow-rose" src="assets/img/yellow_rose_small.png">
             <a-asset-item id="headstone" src="models/tombstone/headstone.obj"></a-asset-item>
@@ -20,18 +21,31 @@
             <a-asset-item id="fence" src="models/fence/fence_white.obj"></a-asset-item>
             <a-asset-item id="lantern-obj" src="models/memory-garden/lantern.obj"></a-asset-item>
             <a-asset-item id="lantern-mtl" src="models/memory-garden/lantern.mtl"></a-asset-item>
+            <a-asset-item id="small-flower-obj" src="models/vegitation/Floral_Alien_Vegetation_OBJ/flower_small.obj"></a-asset-item>
+            <a-asset-item id="small-flower-mtl" src="models/vegitation/Floral_Alien_Vegetation_OBJ/flower_small.mtl"></a-asset-item>
+            <a-asset-item id="large-flower-obj" src="models/vegitation/Floral_Alien_Vegetation_OBJ/tree_large.obj"></a-asset-item>
+            <a-asset-item id="large-flower-mtl" src="models/vegitation/Floral_Alien_Vegetation_OBJ/tree_large.mtl"></a-asset-item>
         </a-assets>
         <!-- THIS IS HOW WE SHOULD REFERENCE THE ASSETS ABOVE -->
         <!-- <a-plane src="#example_img"></a-plane> -->
         <a-entity position="0 2.25 -15" particle-system="preset: snow; particleCount: 5000"></a-entity>
-        <a-plane arborable src="./img/grass-snow.jpg" position="0 -5 -28" rotation="-90 0 175" repeat="5 5" width="48"
-                 height="124" opacity="1.0" transparency=true static-body>
+
+        <a-plane src="#grass-snow" position="0 -5.05 -28" rotation="-90 0 175" repeat="5 5" width="50"
+                 height="100" opacity="1.0" transparency=true></a-plane>
+
+        <a-plane src="#grass-snow" class="clickable" arborable="scaleFrom: 0.05 0.05 0.05; scaleTo: 0.3 0.3 0.3; nTrees: 20;"
+                 position="0 -5 -28" rotation="-90 0 175" repeat="5 5" width="45"
+                 height="95" opacity="1.0" transparency=true color="#99FF99"></a-plane>
+
+        <a-plane class="clickable" src="#grass-snow"
+                 position="0 -4.95 -28" rotation="-90 0 175" repeat="5 5" width="35"
+                 height="85" opacity="1.0" transparency=true>
 
             <a-entity rotation="270 180 0" tributes-garden></a-entity>
 
             <a-entity obj-model="obj: #headstone; mtl: #headstonemat" position="-2 12 0" rotation="270 180 0"
                       scale="1 1 1">
-                <a-plane position="2.4 6.6 -2.3" width="4" height="7" color="#999" transparent="true" opacity="0.6"
+                <a-plane position="2.5 6.6 -2.3" width="4" height="7" color="#999" transparent="true" opacity="0.6"
                          static-body></a-plane>
                 <a-entity headstone-name
                           position="2.4 9.6 -2.3" scale="4 4 4" rotation="0 0 0">
@@ -52,12 +66,20 @@
 
         </a-plane>
 
-        <a-sky src="./img/winter-church-sm.jpg" rotation="0 -92 0"></a-sky>
+        <a-sky src="#sky-image" rotation="0 -92 0"></a-sky>
 
         <!-- our camera / view point-->
         <a-entity id="cameraRig" position="0 0 4">
             <a-camera look-controls>
-                <a-cursor fuse="false"></a-cursor>
+                <a-entity
+
+                    animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.05 0.05 0.05; to: 0.1 0.1 0.1"
+                    animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 0.1 0.1 0.1; to: 0.05 0.05 0.05"
+                    animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 0.1 0.1 0.1"
+                    cursor="fuse: true;"
+                    material="color: black; shader: flat"
+                    position="0 0 -3"
+                    geometry="primitive: ring"></a-entity>
             </a-camera>
         </a-entity>
     </a-scene>

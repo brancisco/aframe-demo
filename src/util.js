@@ -14,7 +14,26 @@ window.UTILS = {
         return isFloat ? randomNumber : Math.floor(randomNumber)
     },
 
-    getXYTributeCoordinates (shiftX=0, shiftY=0, total=300, meters=18, minRadius=6, closest=1, rng=Math.random) {
+    randomSign () {
+        if (Math.random() > 0.5) {
+            return -1
+        }
+        return 1
+    },
+
+    getXYTributeCoordinates (
+        shiftX=0,
+        shiftY=0,
+        total=300,
+        meters=18,
+        minRadius=6,
+        closest=1,
+        rng=Math.random,
+        width=null,
+        height=null,
+        positionX,
+        positionY
+    ) {
         function level (n, meters, total, min) {
             return (meters - min) * ((n)/(total)) + min
         }
@@ -33,8 +52,25 @@ window.UTILS = {
         let finalX = []
         let finalY = []
 
+        let xr, xl, yf, yb
+        if (width && height) {
+            xr = width/2 + positionX
+            xl = -width/2 + positionX
+            yf = height/2 + positionY
+            yb = -height/2 + positionY
+        }
+        
         // check distance from all points to all other points
         for (let i = 0; i < x.length; i ++) {
+            let sX = x[i]+shiftX
+            let sY = y[i]+shiftY
+
+            if (width && (xr < sX || xl > sX)) {
+                continue
+            }
+            if (height && (yf < sY || yb > sY)) {
+                continue
+            }
             let okay = true
             for (let j = i+1; j < x.length; j ++) {
                 let dist = distance(x[i], y[i], x[j], y[j])
@@ -45,8 +81,8 @@ window.UTILS = {
             }
             // record good positions
             if (okay) {
-                finalX.push(x[i]+shiftX)
-                finalY.push(y[i]+shiftY)
+                finalX.push(sX)
+                finalY.push(sY)
             }
         }
         return {x: finalX.reverse(), y: finalY.reverse()}

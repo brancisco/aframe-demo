@@ -2,20 +2,27 @@ AFRAME.registerComponent('flower', {
     schema: {
         position: {type: 'string', default: ''},
         rotation: {type: 'string', default: ''},
-        memory_type: {type: 'string', default: 'comment'},
+        height: {type: 'int', default: '1'},
+        memory_type: {type: 'string', default: 'COMMENT'},
     },
     init: function () {
 
         // our assets
         const imageSources = {
-            COMMENT: '#red-rose',
-            PHOTO: '#yellow-rose'
+            PHOTO: {
+                src: '#small-flower-obj',
+                mtl: '#small-flower-mtl'
+            },
+            COMMENT: {
+                src: '#large-flower-obj',
+                mtl: '#large-flower-mtl'
+            }
         };
 
-        let model = document.createElement('a-image');
+        let model = document.createElement('a-obj-model')
 
-        model.setAttribute('width', 0.5);
-        model.setAttribute('scale', '3 3 3');
+        model.setAttribute('height', this.data.height)
+        model.setAttribute('scale', '0.2 0.2 0.2');
 
         // set position
         if (this.data.position) {
@@ -23,7 +30,10 @@ AFRAME.registerComponent('flower', {
         }
 
         // set graphic image
-        model.setAttribute('src', imageSources[this.data.memory_type.toUpperCase()]);
+        model.setAttribute('src', imageSources[this.data.memory_type.toUpperCase()].src)
+        model.setAttribute('mtl', imageSources[this.data.memory_type.toUpperCase()].mtl)
+        model.setAttribute('opacity', 0)
+        model.setAttribute('animation', 'property: opacity; to: 1; loop: false; dur: 500;')
 
         this.el.appendChild(model)
     }
