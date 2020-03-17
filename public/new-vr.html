@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VR Obituary Demo</title>
+    <script type="text/javascript" src="/app.bundle.js"></script>
+</head>
+<body>
+    <a-scene inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">
+        <a-assets>
+            <video id="memorial-video" autoplay loop="true" src="video/VR_memorial_vid2.mp4"></video>
+
+            <a-asset-item id="headstone" src="models/tombstone/headstone.obj"></a-asset-item>
+            <a-asset-item id="headstonemat" src="models/tombstone/headstone.mtl"></a-asset-item>
+
+            <a-asset-item id="small-flower-obj" src="models/vegitation/Floral_Alien_Vegetation_OBJ/flower_small.obj"></a-asset-item>
+            <a-asset-item id="small-flower-mtl" src="models/vegitation/Floral_Alien_Vegetation_OBJ/flower_small.mtl"></a-asset-item>
+
+            <a-asset-item id="oak-tree-obj" src="models/trees/Oak_Tree.obj"></a-asset-item>
+            <a-asset-item id="oak-tree-mtl" src="models/trees/Oak_Tree.mtl"></a-asset-item>
+
+            <a-asset-item id="palm-tree-obj" src="models/trees/Palm_Tree.obj"></a-asset-item>
+            <a-asset-item id="palm-tree-mtl" src="models/trees/Palm_Tree.mtl"></a-asset-item>
+
+            <a-asset-item id="poplar-tree-obj" src="models/trees/Poplar_Tree.obj"></a-asset-item>
+            <a-asset-item id="poplar-tree-mtl" src="models/trees/Poplar_Tree.mtl"></a-asset-item>
+
+            <a-asset-item id="tree-obj" src="models/trees/Fir_Tree.obj"></a-asset-item>
+            <a-asset-item id="tree-mtl" src="models/trees/Fir_Tree.mtl"></a-asset-item>
+
+            <img id="snow-color" src="textures/grass/Ground037_2K_Color.jpg">
+            <img id="snow-norm" src="textures/grass/Ground037_2K_Normal.jpg">
+            <img id="snow-occ" src="textures/grass/Ground037_2K_AmbientOcclusion.jpg">
+            <img id="snow-disp" src="textures/grass/Ground037_2K_Displacement.jpg">
+
+            <img id="close-button" src="img/close.png">
+
+            <img id="football-stadium-img" src="img/ColtsFootballStadium.jpg">
+        </a-assets>
+
+        <a-sky src="#football-stadium-img"></a-sky>
+
+        <a-cylinder
+            garden="position: 0.5 -0.5; count:50; outerRadius:8; innerRadius:1.8; minObjDist:0.8;"
+            position="0 0 0" radius="8" height="0.01" 
+            material="
+                src: #snow-color;
+                normalMap: #snow-norm;
+                normalTextureRepeat: 4 4;
+                ambientOcclusionMap: #snow-occ;
+                ambientOcclusionTextureRepeat: 4 4;
+                repeat: 4 4"
+        ></a-cylinder>
+
+        <a-cylinder 
+            arborable="scaleFrom: 0.05 0.05 0.05; scaleTo: 0.5 0.5 0.5; nTrees: 20;"
+            position="0 -0.05 0" radius="10" height="0.01"
+            color="#bbffbb"
+            material="
+                src: #snow-color;
+                normalMap: #snow-norm;
+                normalTextureRepeat: 4 4;
+                ambientOcclusionMap: #snow-occ;
+                ambientOcclusionTextureRepeat: 4 4;
+                repeat: 4 4"
+        ></a-cylinder>
+
+        <a-video src="#memorial-video" width="16" height="9" position="-50 20 -5.5" rotation="10 90 0"></a-video>
+
+        <!-- <a-text
+            value="Now Interactable"
+            geometry="primitive:plane;"
+            position="1 1 1"
+            align="center"
+            wrapCount="10"
+            scale="0.5 0.5 0.5"
+        ></a-text> -->
+
+        <a-entity obj-model="obj: #headstone; mtl: #headstonemat;" position="0 0 0" rotation="0 0 0"
+            scale="0.18 0.18 0.18">
+            <a-plane position="2.5 6.6 -2.3" width="4" height="7" color="#fff" transparent="true" opacity="0.2"
+                         static-body></a-plane>
+                <a-entity text="font: aileronsemibold; value:Harold Whyte; color: #000; align: center; wrapCount: 10; baseline: top"
+                          position="2.4 9.6 -2.3" scale="4 4 4" rotation="0 0 0">
+                </a-entity>
+                <a-entity text="font: aileronsemibold; value:1949 - 2020; color: #000; align: center; wrapCount: 10; baseline: top"
+                          position="2.4 7.3 -2.3" scale="2.7 2.7 2.7" rotation="0 0 0">
+                </a-entity>
+                <a-entity text="font: aileronsemibold; value:'What a time.. to be alive'; color: #000; align: center; wrapCount: 10; baseline: top"
+                          position="2.4 5.8 -2.3" scale="3.7 3.7 3.7" rotation="0 0 0">
+                </a-entity>
+        </a-entity>
+
+        <!-- <a-obj-model src="#oak-tree-obj" mtl="#oak-tree-mtl"></a-obj-model>
+        <a-obj-model position="-5 0 0" src="#palm-tree-obj" mtl="#palm-tree-mtl"></a-obj-model>
+        <a-obj-model position="5 0 0" src="#poplar-tree-obj" mtl="#poplar-tree-mtl"></a-obj-model>
+        <a-obj-model position="0 0 5" src="#fir-tree-obj" mtl="#fir-tree-mtl"></a-obj-model> -->
+
+        <a-entity id="cameraRig" camera look-controls wasd-controls position="-1 1.6 3">
+            <a-entity
+
+                animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.02 0.02 0.02; to: 0.05 0.05 0.05"
+                animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1000; from: 0.05 0.05 0.05; to: 0.01 0.01 0.01"
+                animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 0.05 0.05 0.05"
+                cursor="fuse: true;fuseTimeout: 1000;"
+                material="color: black; shader: flat"
+                position="0 0 -1"
+                geometry="primitive: ring;radiusInner: 0.35;radiusOuter:0.55;"></a-entity>
+        </a-entity>
+    </a-scene>
+</body>
+</html>

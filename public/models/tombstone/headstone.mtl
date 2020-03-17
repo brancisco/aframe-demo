@@ -10,4 +10,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd headstone.jpg
+map_Kd -s 2.0 2.0 2.0 headstone.jpg

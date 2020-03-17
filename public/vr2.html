@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VR Obituary Demo</title>
+    <script type="text/javascript" src="/app.bundle.js"></script>
+    <script src="https://cdn.rawgit.com/feiss/aframe-environment-component/76b2bbf3/aframe-environment-component.min.js"></script>
+</head>
+<body>
+    <a-scene inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">
+        <a-assets>
+            <img id="sky-image" src="img/winter-church-sm.jpg">
+        </a-assets>
+        <a-plane  width="20" height="30" rotation="-90 0 0" color="#9999FF"></a-plane>
+        <a-box position="0 1 0" width="1" depth="1" height="2"></a-box>
+
+        <a-sky src="#sky-image" rotation="0 -92 0"></a-sky>
+    </a-scene>
+</body>
+</html>

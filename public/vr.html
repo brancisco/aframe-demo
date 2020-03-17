@@ -25,11 +25,15 @@
             <a-asset-item id="small-flower-mtl" src="models/vegitation/Floral_Alien_Vegetation_OBJ/flower_small.mtl"></a-asset-item>
             <a-asset-item id="large-flower-obj" src="models/vegitation/Floral_Alien_Vegetation_OBJ/tree_large.obj"></a-asset-item>
             <a-asset-item id="large-flower-mtl" src="models/vegitation/Floral_Alien_Vegetation_OBJ/tree_large.mtl"></a-asset-item>
+            <img id="snow-color" src="textures/Snow/Snow_001_COLOR.jpg">
+            <img id="snow-norm" src="textures/Snow/Snow_001_NORM.jpg">
+            <img id="snow-occ" src="textures/Snow/Snow_001_OCC.jpg">
+            <img id="snow-disp" src="textures/Snow/Snow_001_DISP.jpg">
         </a-assets>
         <!-- THIS IS HOW WE SHOULD REFERENCE THE ASSETS ABOVE -->
         <!-- <a-plane src="#example_img"></a-plane> -->
         <a-entity position="0 2.25 -15" particle-system="preset: snow; particleCount: 5000"></a-entity>
-
+        <a-sphere material="src: #snow-color; normalMap: #snow-norm; ambientOcclusionMap: #snow-occ; displacementMap: #snow-disp;" width="3" height="3"></a-sphere>
         <a-plane src="#grass-snow" position="0 -5.05 -28" rotation="-90 0 175" repeat="5 5" width="50"
                  height="100" opacity="1.0" transparency=true></a-plane>
 
@@ -37,9 +41,9 @@
                  position="0 -5 -28" rotation="-90 0 175" repeat="5 5" width="45"
                  height="95" opacity="1.0" transparency=true color="#99FF99"></a-plane>
 
-        <a-plane class="clickable" src="#grass-snow"
-                 position="0 -4.95 -28" rotation="-90 0 175" repeat="5 5" width="35"
-                 height="85" opacity="1.0" transparency=true>
+        <a-plane src="#grass-snow" class="clickable" repeat="5 5"
+                 position="0 -4.95 -28" rotation="-90 0 175" width="35"
+                 height="85">
 
             <a-entity rotation="270 180 0" tributes-garden></a-entity>
 
