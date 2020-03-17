@@ -21,6 +21,10 @@ window.UTILS = {
         return 1
     },
 
+    sign (value) {
+        return value >= 0 ? 1 : -1
+    },
+
     getXYTributeCoordinates (
         shiftX=0,
         shiftY=0,
