@@ -1,11 +1,12 @@
 /* AFRAME LIBRARY SHOULD BE THE FIRST THING IMPORTED */
 require('aframe')
 
+
 /* REQUIRE ANY node_module LEVEL COMPONENTS HERE */
-// require('example-component')
 require('aframe-extras')
 require('aframe-particle-system-component')
 require('axios')
+require('aframe-rounded')
 
 /* LIBS */
 require('./util')
@@ -23,3 +24,4 @@ require('Components/headstone-obit')
 require('Components/headstone-photo')
 require('aframe-particle-system-component');
 require('Components/garden')
+require('Components/text-on-hover')
