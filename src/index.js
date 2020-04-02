@@ -6,7 +6,6 @@ require('aframe')
 require('aframe-extras')
 require('aframe-particle-system-component')
 require('axios')
-require('aframe-rounded')
 
 /* LIBS */
 require('./util')
